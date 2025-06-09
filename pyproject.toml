@@ -1,0 +1,16 @@
+[project]
+name = "pdf-to-text-qwen"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "easyocr>=1.7.2",
+    "numpy>=2.2.6",
+    "ollama>=0.5.1",
+    "opencv-python>=4.11.0.86",
+    "pdf2image>=1.17.0",
+    "pillow>=11.2.1",
+    "pretty-errors>=1.2.25",
+    "pymupdf>=1.26.0",
+]
