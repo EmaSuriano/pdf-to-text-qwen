@@ -3,9 +3,8 @@ import fitz  # PyMuPDF
 from PIL import Image
 import io
 import base64
-import pretty_errors
-import sys
 import argparse
+from difflib import SequenceMatcher
 
 
 def pdf_to_images(pdf_path, num_splits=None, overlap_ratio=0.1):
@@ -61,6 +60,48 @@ def image_to_base64(image):
     return base64.b64encode(buffered.getvalue()).decode()
 
 
+def remove_overlapping_text(texts, similarity_threshold=0.7):
+    """Remove overlapping text between consecutive page sections"""
+    if len(texts) <= 1:
+        return texts
+
+    cleaned_texts = [texts[0]]  # Keep first text as-is
+
+    for i in range(1, len(texts)):
+        current_text = texts[i].strip()
+        previous_text = cleaned_texts[-1].strip()
+
+        # Split into lines for better comparison
+        current_lines = current_text.split("\n")
+        previous_lines = previous_text.split("\n")
+
+        # Find overlapping content at the beginning of current text
+        best_match_end = 0
+        for j in range(min(10, len(current_lines))):  # Check first 10 lines
+            current_segment = "\n".join(current_lines[: j + 1])
+
+            # Check if this segment appears in the previous text
+            for k in range(max(0, len(previous_lines) - 15), len(previous_lines)):
+                previous_segment = "\n".join(previous_lines[k:])
+                similarity = SequenceMatcher(
+                    None, current_segment.lower(), previous_segment.lower()
+                ).ratio()
+
+                if similarity > similarity_threshold:
+                    best_match_end = j + 1
+                    break
+
+        # Remove overlapping part from current text
+        if best_match_end > 0:
+            cleaned_current = "\n".join(current_lines[best_match_end:])
+        else:
+            cleaned_current = current_text
+
+        cleaned_texts.append(cleaned_current)
+
+    return cleaned_texts
+
+
 def extract_text_from_pdf(pdf_path, model_name="qwen2.5vl:7b"):
     """Extract text from PDF using Qwen2.5-VL via Ollama"""
     images = pdf_to_images(pdf_path, num_splits=4)
@@ -101,13 +142,17 @@ def extract_text_from_pdf(pdf_path, model_name="qwen2.5vl:7b"):
 
         print()  # New line after streaming is complete
 
-        # page_text = response["message"]["content"]
-        extracted_text.append(f"--- Page {i + 1} ---\n{page_text}\n")
+        extracted_text.append(page_text.strip())
 
-    return "\n".join(extracted_text)
+    # Remove overlapping text between sections
+    cleaned_texts = remove_overlapping_text(extracted_text)
+
+    # Join all text without page markers
+    return "\n\n".join(text.strip() for text in cleaned_texts if text.strip())
 
 
 def main():
+    """Main function to handle command line arguments and initiate text extraction"""
     parser = argparse.ArgumentParser(
         description="Extract text from PDF using Qwen2.5-VL"
     )
@@ -120,11 +165,12 @@ def main():
 
     extracted_text = extract_text_from_pdf(args.pdf_path, args.model)
 
-    # Save to file
-    with open("extracted_text.txt", "w", encoding="utf-8") as f:
+    # Join all text without page markers
+    # Save to markdown file
+    with open("extracted_text.md", "w", encoding="utf-8") as f:
         f.write(extracted_text)
 
-    print("Text extraction complete! Check 'extracted_text.txt'")
+    print("Text extraction complete! Check 'extracted_text.md'")
 
 
 # Usage

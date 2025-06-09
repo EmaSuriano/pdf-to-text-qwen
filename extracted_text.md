@@ -1,4 +1,3 @@
---- Page 1 ---
 PRÜFUNGSTRRAINING - Schriftlicher Ausdruck
 
 2. Thema: Beschwererdebrief
@@ -11,10 +10,6 @@ Startseite Ein-/Ausloggen Meine Auktionen Mitglieder AGB Hilfe
 
 Dell Notebook Athlon XP 2000+, 512 MB
 
---- Page 2 ---
-Dell Notebook Athlon XP 2000+, 512 MB
-
-Aktuelles Gebot: 240,09 EURO
 inkl. MwSt
 
 Angebotsende: Beendet
@@ -31,37 +26,21 @@ Höchstbietender: mustermann
 
 Zustand: Generalüberholt
 Festplattenkapazität: 40 GB
+Marke: DELL
 Prozessortyp: Mobile AMD Athlon XP 2000+
 Prozessorgeschwindigkeit: 1660 MHz
-Marke: DELL
 
---- Page 3 ---
-Zustand: Generalüberholt
-Festplattenkapazität: 40 GB
-Prozessortyp: Mobile AMD Athlon XP 2000+
-Prozessorgeschwindigkeit: 1660 MHz
-Marke: DELL
-Arbeitsspeicher (RAM): 512 MB
-Ausstattungsmerkmale: 1660 MHz
-Bauart: Standard-Notebook
 Bauart: Standard-Notebook
 10/100 LAN-Karte, IEEE 1394-Firewire,
-Internes Laufwerk: CD-RW/DVD-ROM
-Grafik on Board, Betriebssystem, USB 2.0,
 Bildschirmgröße: 15 Zoll
-USB 1/1, Modem
+Grafik on Board, Betriebssystem, USB 2.0,
 Gewicht: 2,8 kg
+USB 1/1, Modem
 
 Bei einem Online-Auktionshaus haben Sie oben angebotenen Computer zu einem günstigen Preis ersteigert und auch das Geld überwiesen. Aber das Gerät funktioniert nicht einwandfrei. Es kam beschädigt bei Ihnen an. Außerdem wurden nicht alle Teile des Zubehörs mitgeliefert.
 
 Schreiben Sie eine Reklamation per E-Mail an das Auktionshaus und beschweren Sie sich. Ihr Brief sollte mindestens zwei der folgenden Punkte und einen weiteren Aspekt enthalten:
 
-- Ihre Forderung (Teil des Geldes zurück oder ...),
-- Zustand der gelieferten Ware,
-- Erwartungen nach Lesen des Angebots,
-- Grund des Schreibens.
-
---- Page 4 ---
 - Ihre Forderung (Teil des Geldes zurück oder ...),
 - Zustand der gelieferten Ware,
 - Erwartungen nach Lesen des Angebots,
