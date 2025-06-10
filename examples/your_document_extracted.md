@@ -10,27 +10,20 @@ Startseite Ein-/Ausloggen Meine Auktionen Mitglieder AGB Hilfe
 
 Dell Notebook Athlon XP 2000+, 512 MB
 
-inkl. MwSt
-
-Angebotsende: Beendet
-(24.06.07 15:43:24 MESZ)
-
+Angebotsende: Beendet (24.06.07 15:43:24 MESZ)
 Versandkosten: 15,00 EURO
 Versicherter Versand
-
 Versand nach: nur Deutschland
-
+Service nach: Deutschland
 Übersicht: 17 Gebot(e)
-
 Höchstbietender: mustermann
-
 Zustand: Generalüberholt
 Festplattenkapazität: 40 GB
-Marke: DELL
 Prozessortyp: Mobile AMD Athlon XP 2000+
 Prozessorgeschwindigkeit: 1660 MHz
+Marke: DELL
+ISBN 978-3-19-161695-3, © Hueber Verlag 2008
 
-Bauart: Standard-Notebook
 10/100 LAN-Karte, IEEE 1394-Firewire,
 Bildschirmgröße: 15 Zoll
 Grafik on Board, Betriebssystem, USB 2.0,

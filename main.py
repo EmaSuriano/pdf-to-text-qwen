@@ -102,9 +102,15 @@ def remove_overlapping_text(texts, similarity_threshold=0.7):
     return cleaned_texts
 
 
-def extract_text_from_pdf(pdf_path, model_name="qwen2.5vl:7b"):
+def extract_text_from_pdf(
+    pdf_path: str,
+    model="qwen2.5vl:7b",
+    stream=False,
+    num_splits=4,
+    overlap_ratio=0.1,
+):
     """Extract text from PDF using Qwen2.5-VL via Ollama"""
-    images = pdf_to_images(pdf_path, num_splits=4)
+    images = pdf_to_images(pdf_path, num_splits=num_splits, overlap_ratio=overlap_ratio)
     extracted_text = []
 
     for i, image in enumerate(images):
@@ -115,7 +121,7 @@ def extract_text_from_pdf(pdf_path, model_name="qwen2.5vl:7b"):
 
         print("Extracting text from page", i + 1)
         response = ollama.chat(
-            model=model_name,
+            model=model,
             messages=[
                 {
                     "role": "user",
@@ -123,7 +129,7 @@ def extract_text_from_pdf(pdf_path, model_name="qwen2.5vl:7b"):
                     "images": [img_base64],
                 }
             ],
-            stream=True,
+            stream=stream,
             options={
                 "temperature": 0.1,  # Lower temperature
                 "top_p": 0.8,  # Reduce randomness
@@ -156,21 +162,35 @@ def main():
     parser = argparse.ArgumentParser(
         description="Extract text from PDF using Qwen2.5-VL"
     )
-    parser.add_argument(
-        "pdf_path", default="your_document.pdf", help="Path to the PDF file"
-    )
+
+    parser.add_argument("pdf_path", help="Path to the PDF file")
     parser.add_argument("--model", default="qwen2.5vl:7b", help="Model name to use")
+    parser.add_argument(
+        "--num_splits", type=int, default=4, help="Number of splits per page "
+    )
+    parser.add_argument(
+        "--overlap_ratio", type=float, default=0.1, help="Overlap ratio between splits"
+    )
+    parser.add_argument(
+        "--stream", type=bool, default=True, help="Enable streaming output"
+    )
 
     args = parser.parse_args()
 
-    extracted_text = extract_text_from_pdf(args.pdf_path, args.model)
+    extracted_text = extract_text_from_pdf(
+        args.pdf_path,
+        model=args.model,
+        stream=args.stream,
+        num_splits=args.num_splits,
+        overlap_ratio=args.overlap_ratio,
+    )
 
-    # Join all text without page markers
     # Save to markdown file
-    with open("extracted_text.md", "w", encoding="utf-8") as f:
+    output_path = args.pdf_path.rsplit(".", 1)[0] + "_extracted.md"
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(extracted_text)
 
-    print("Text extraction complete! Check 'extracted_text.md'")
+    print(f"Text extraction complete! Check '{output_path}' for results.")
 
 
 # Usage

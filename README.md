@@ -43,21 +43,27 @@ uv sync
 ## Usage
 
 ```bash
-# Run the application
-uv run python main.py <path-to-pdf-file>
-```
+➜  pdf-to-text-qwen git:(main) ✗ uv run main.py -h
 
-## Development
+usage: main.py [-h] [--model MODEL]
+               [--num_splits NUM_SPLITS]
+               [--overlap_ratio OVERLAP_RATIO]
+               [--stream STREAM]
+               pdf_path
 
-```bash
-# Activate the virtual environment
-uv shell
+Extract text from PDF using Qwen2.5-VL
 
-# Add new dependencies
-uv add <package-name>
+positional arguments:
+  pdf_path              Path to the PDF file
 
-# Run tests
-uv run pytest
+options:
+  -h, --help            show this help message and exit
+  --model MODEL         Model name to use
+  --num_splits NUM_SPLITS
+                        Number of splits per page
+  --overlap_ratio OVERLAP_RATIO
+                        Overlap ratio between splits
+  --stream STREAM       Enable streaming output
 ```
 
 ## Requirements
